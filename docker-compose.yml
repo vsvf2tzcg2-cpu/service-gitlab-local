@@ -1,37 +1,13 @@
 version: '3.8'
 
 services:
-  gitlab:
-    image: 'gitlab/gitlab-ce:latest'
-    container_name: 'gitlab-server'
-    restart: always
-    hostname: 'gitlab.local'
-    environment:
-      GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://localhost:8080'
-        prometheus['enable'] = true
-    ports:
-      - '8080:8080'
-      - '8443:443'
-      - '2222:22'
-    volumes:
-      - gitlab_config:/etc/gitlab
-      - gitlab_logs:/var/log/gitlab
-      - gitlab_data:/var/opt/gitlab
-    shm_size: '256m'
-
   gitlab-runner:
     image: 'gitlab/gitlab-runner:latest'
-    container_name: 'gitlab-runner'
+    container_name: gitlab-runner
     restart: always
-    depends_on:
-      - gitlab
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
       - runner_config:/etc/gitlab-runner
-      - '/var/run/docker.sock:/var/run/docker.sock'
 
 volumes:
-  gitlab_config:
-  gitlab_logs:
-  gitlab_data:
   runner_config:
