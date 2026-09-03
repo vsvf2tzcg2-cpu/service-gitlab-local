@@ -7,7 +7,7 @@ docker exec -it gitlab-runner gitlab-runner register \
   --url "https://url-de-ton-gitlab.com" \
   --token "TON_TOKEN_GLRT_ICI" \
   --executor "docker" \
-  --docker-image "alpine:latest" \
+  --docker-image "docker:29" \
   --docker-volumes "/var/run/docker.sock:/var/run/docker.sock" \
   --docker-volumes "/cache"
 
