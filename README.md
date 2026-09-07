@@ -3,13 +3,12 @@ service gitlab local
 
 guide pour l'instalation du runner:
 docker compose up -d
-docker exec -it gitlab-runner gitlab-runner register \
-  --url "https://url-de-ton-gitlab.com" \
-  --token "TON_TOKEN_GLRT_ICI" \
+MSYS_NO_PATHCONV=1 docker exec -it gitlab-runner gitlab-runner register \
+  --non-interactive \
+  --url "https://gitlab.com/" \
+  --token "ton token" \
   --executor "docker" \
-  --docker-image "docker:29" \
+  --docker-image "docker:24.0.5" \
+  --description "Runner Windows" \
   --docker-volumes "/var/run/docker.sock:/var/run/docker.sock" \
   --docker-volumes "/cache"
-
-  executor: docker
-  image: docker:latest

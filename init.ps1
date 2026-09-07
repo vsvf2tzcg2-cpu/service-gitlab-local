@@ -9,6 +9,6 @@ for ($i = 0; $i -lt $tokens.Count; $i++) {
         --name "runner-$i" `
         --executor "docker" `
         --docker-image "docker:29" `
-        --docker-volumes "/var/run/docker.sock:/var/run/docker.sock" `
+        --docker-volumes "//var/run/docker.sock:/var/run/docker.sock" `
         --docker-volumes "/cache"
 }
