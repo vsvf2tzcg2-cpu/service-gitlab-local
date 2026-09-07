@@ -1,13 +1,49 @@
-version: '3.8'
-
 services:
-  gitlab-runner:
+  gitlab-runner-01: &runner
     image: 'gitlab/gitlab-runner:latest'
-    container_name: gitlab-runner
+    container_name: gitlab-runner-01
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - runner_config:/etc/gitlab-runner
+      - runner_config_01:/etc/gitlab-runner
+    healthcheck:
+      test: ["CMD", "gitlab-runner", "verify"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  gitlab-runner-02:
+    <<: *runner
+    container_name: gitlab-runner-02
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - runner_config_02:/etc/gitlab-runner
+
+  gitlab-runner-03:
+    <<: *runner
+    container_name: gitlab-runner-03
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - runner_config_03:/etc/gitlab-runner
+
+  gitlab-runner-04:
+    <<: *runner
+    container_name: gitlab-runner-04
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - runner_config_04:/etc/gitlab-runner
+
+  gitlab-runner-05:
+    <<: *runner
+    container_name: gitlab-runner-05
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - runner_config_05:/etc/gitlab-runner
 
 volumes:
-  runner_config:
+  runner_config_01:
+  runner_config_02:
+  runner_config_03:
+  runner_config_04:
+  runner_config_05:
