@@ -12,3 +12,18 @@ MSYS_NO_PATHCONV=1 docker exec -it gitlab-runner gitlab-runner register \
   --description "Runner Windows" \
   --docker-volumes "/var/run/docker.sock:/var/run/docker.sock" \
   --docker-volumes "/cache"
+
+
+---
+
+sous mac/linux 
+
+docker exec -it gitlab-runner gitlab-runner register \
+  --non-interactive \
+  --url "https://gitlab.com/" \
+  --token "VOTRE_TOKEN_GITLAB" \
+  --executor "docker" \
+  --docker-image "docker:24.0.5" \
+  --description "Runner Mac avec Socket" \
+  --docker-volumes "/var/run/docker.sock:/var/run/docker.sock" \
+  --docker-volumes "/cache"
